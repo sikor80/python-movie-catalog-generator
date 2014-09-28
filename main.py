@@ -1,10 +1,12 @@
-from media import Movie
-from html import *
 import os 
 import json
 import urllib
 import webbrowser
-import sys, traceback
+import sys
+import traceback
+
+from media import *
+from html import *
 
 
 def main():
@@ -56,7 +58,7 @@ def main():
 		try:
 
 
-			## Opening and generating final movies.html file 
+			## Opening and generating final html (for example movies.html) file 
 			html_file = open(output_file,"w")
 			html_file.write(header)
 
@@ -74,7 +76,7 @@ def main():
 				html_file.write("<p><b>Rating:</b> " + str(movie_object.rating) + "</p>" )
 				html_file.write("</div></div>")
 
-			## Below some stats presented on the bottom of the page 
+			## Generate some stats at on the bottom of the html page 
 			html_file.write('<hr>')
 			html_file.write('<p> Directory scanned: ' + str(os.getcwd()) + '/' + source_dir + '</p>')
 			html_file.write('<p> Success entries: ' + str(len(movie_objects_list)) + '</p>')
@@ -84,7 +86,7 @@ def main():
 			html_file.write(footer)
 			html_file.close()
 
-			## Opening the browser and presenting the summary file 
+			## Opening the browser and presenting the summary html page 
 			webbrowser.open('file://' + os.path.realpath(output_file))
 		except Exception, e:	
 			print e
