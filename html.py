@@ -3,7 +3,7 @@ header = '''
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Home movie catalog generator</title>
+    <title>python-movie-catalog-generator</title>
 
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
     <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
@@ -12,7 +12,8 @@ header = '''
 
 <body>
 	<div class="container">
-		<h1>Home movie catalog generator</h1>
+		<h1>python-movie-catalog-generator</h1>
+		<hr>
 '''
 
 footer = '''
