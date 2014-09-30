@@ -12,12 +12,12 @@ from html import *
 def main():
 	try:
 		default_source_dir = "movies"
-		source_dir = raw_input("Enter directory / path: (default: %s):\n" % default_source_dir) or default_source_dir
+		source_dir = raw_input("Enter name of the directory / path: (default: %s):\n" % default_source_dir) or default_source_dir
 		if not source_dir:
 		    source_dir = default_source_dir
 
 		default_output_file = "movies.html"
-		output_file = raw_input("Enter name of output file (default: %s):\n" % default_output_file) or default_output_file
+		output_file = raw_input("Enter name of the output file (default: %s):\n" % default_output_file) or default_output_file
 		if not output_file:
 		    output_file = default_output_file
 
@@ -57,26 +57,28 @@ def main():
 		    	
 		try:
 
-
 			## Opening and generating final html (for example movies.html) file 
 			html_file = open(output_file,"w")
 			html_file.write(header)
 
-			for movie_object in movie_objects_list:	
+			for movie_object in movie_objects_list:	      
 				html_file.write('<div class="row">')
-				html_file.write('<div class="col-md-4">')
-				html_file.write('<div class="thumbnail">')
+				html_file.write('<div class="medium-4 columns">')
+				html_file.write('<div class="panel">')
 				html_file.write('<img src="' + movie_object.poster + '" />')
 				html_file.write('</div></div>')
-				html_file.write('<div class="col-md-8">')
-				html_file.write('<h2>' + movie_object.title + ' (' + movie_object.year + ')' + '</h2>')
+				html_file.write('<div class="medium-8 columns">')
+				html_file.write('<div class="panel">')
+				html_file.write('<a href="#" class="button large success expand">' + movie_object.title + ' (' + movie_object.year + ')' + '</a>')
 				html_file.write("<p><b>Plot:</b> " + str(movie_object.plot) + "</p>" )
 				html_file.write("<p><b>Actors:</b> " + str(movie_object.actors) + "</p>" )
 				html_file.write("<p><b>Director:</b> " + str(movie_object.director) + "</p>" )
 				html_file.write("<p><b>Rating:</b> " + str(movie_object.rating) + "</p>" )
-				html_file.write("</div></div>")
+				
+				html_file.write("</div></div></div>")
 
 			## Generate some stats at on the bottom of the html page 
+			html_file.write('<div class="row">')
 			html_file.write('<hr>')
 			html_file.write('<p> Directory scanned: ' + str(os.getcwd()) + '/' + source_dir + '</p>')
 			html_file.write('<p> Success entries: ' + str(len(movie_objects_list)) + '</p>')
@@ -92,8 +94,7 @@ def main():
 			print e
 			print "***** Error. Maybe try to run the script again but bit later? *****"    	
 			sys.exit(0)	
-
-    	
+	
 	except Exception, e:	
 		print e
 		print "***** Error. Maybe try to run the script again but bit later? *****"    	

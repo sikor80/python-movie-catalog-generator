@@ -4,21 +4,44 @@ header = '''
 <head>
     <meta charset="utf-8">
     <title>python-movie-catalog-generator</title>
-
-    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
-    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+    
+    <link rel="stylesheet" href="foundation/css/foundation.min.css" />
+    <link rel="stylesheet" href="foundation/css/foundation-icons.css" />
+    <script src="foundation/js/vendor/modernizr.js"></script>
+    <script src="foundation/js/vendor/jquery.js"></script>
+	<script src="foundation/js/foundation/foundation.js"></script>    
 </head>
 
-<body>
-	<div class="container">
-		<h1>python-movie-catalog-generator</h1>
-		<hr>
+<body>	
+	<div class="row">	
+      <div class="medium-12 columns">
+            <h2>python-movie-catalog-generator</h2>
+            <hr>
+
+            <dl class="sub-nav">
+              <dt>Sort by:</dt>
+              <dd class="active"><a href="#">Title</a></dd>
+              <dd><a href="#">Year</a></dd>
+              <dd><a href="#">Genre</a></dd>
+              <dd><a href="#">Rating</a></dd>
+              <dd><a href="#">Director</a></dd>
+            </dl>
+
+
+
+        </div>
+    </div>
+    
+    
 '''
 
 footer = '''
 		
-	</div>
+
+        
 </body>
 </html>
 '''
+
+
+
