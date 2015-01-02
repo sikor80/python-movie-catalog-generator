@@ -16,18 +16,8 @@ header = '''
 	<div class="row">	
       <div class="medium-12 columns">
             <h2>python-movie-catalog-generator</h2>
+
             <hr>
-
-            <dl class="sub-nav">
-              <dt>Sort by:</dt>
-              <dd class="active"><a href="#">Title</a></dd>
-              <dd><a href="#">Year</a></dd>
-              <dd><a href="#">Genre</a></dd>
-              <dd><a href="#">Rating</a></dd>
-              <dd><a href="#">Director</a></dd>
-            </dl>
-
-
 
         </div>
     </div>

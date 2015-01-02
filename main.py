@@ -4,20 +4,27 @@ import urllib
 import webbrowser
 import sys
 import traceback
+import logging
 
-from media import *
-from html import *
+
+from libs.media import *
+from libs.html import *
 
 
 def main():
+
+	readme = open('README', 'r')
+	print "Printing README file ..."
+	print readme.read()
+
 	try:
 		default_source_dir = "movies"
-		source_dir = raw_input("Enter name of the directory / path: (default: %s):\n" % default_source_dir) or default_source_dir
+		source_dir = raw_input("Enter path to the directory: (Or press ENTER for default: %s)\n" % default_source_dir) or default_source_dir
 		if not source_dir:
 		    source_dir = default_source_dir
 
 		default_output_file = "movies.html"
-		output_file = raw_input("Enter name of the output file (default: %s):\n" % default_output_file) or default_output_file
+		output_file = raw_input("Enter path/name of the output file (Or press ENTER for default: %s)\n" % default_output_file) or default_output_file
 		if not output_file:
 		    output_file = default_output_file
 
@@ -44,24 +51,30 @@ def main():
 					movie_plot = data["Plot"].encode('utf8')
 					movie_poster = data["Poster"]
 					movie_rating = data["imdbRating"]
-					movie_object_name = "movie_" + movie_imdbID
+					#movie_object_name = "movie_" + movie_imdbID
 					movie_object_name = Movie(movie_title, movie_year, movie_director, movie_actors, movie_plot, movie_poster, movie_rating)
+					
 					movie_objects_list.append(movie_object_name)
 					print "Success - " + movie
+					logging.info("Success - " + movie)
 				except:
 					failed_movie_objects_list.append(movie)
 					print "Failed - " + movie
+					logging.info("Failed - " + movie)
 					pass
 			except:
 				print "***** Error. Maybe try to run the script again but bit later? *****"
+				logging.critical('Critical error -- shutting down')   	
 		    	
 		try:
 
 			## Opening and generating final html (for example movies.html) file 
 			html_file = open(output_file,"w")
 			html_file.write(header)
+			
+			for movie_object in movie_objects_list:	 
+				news = movie_object.add_director_news()
 
-			for movie_object in movie_objects_list:	      
 				html_file.write('<div class="row">')
 				html_file.write('<div class="medium-4 columns">')
 				html_file.write('<div class="panel">')
@@ -72,7 +85,7 @@ def main():
 				html_file.write('<a href="#" class="button large success expand">' + movie_object.title + ' (' + movie_object.year + ')' + '</a>')
 				html_file.write("<p><b>Plot:</b> " + str(movie_object.plot) + "</p>" )
 				html_file.write("<p><b>Actors:</b> " + str(movie_object.actors) + "</p>" )
-				html_file.write("<p><b>Director:</b> " + str(movie_object.director) + "</p>" )
+				html_file.write('<p><b>Director:</b> ' + str(movie_object.director) + '<a href="' + news + '"> - Google News</a></p>')
 				html_file.write("<p><b>Rating:</b> " + str(movie_object.rating) + "</p>" )
 				
 				html_file.write("</div></div></div>")
@@ -83,7 +96,8 @@ def main():
 			html_file.write('<p> Directory scanned: ' + str(os.getcwd()) + '/' + source_dir + '</p>')
 			html_file.write('<p> Success entries: ' + str(len(movie_objects_list)) + '</p>')
 			html_file.write('<p> Failed entries (below): ' + str(len(failed_movie_objects_list)) + '</p>') 
-			html_file.write(str(failed_movie_objects_list))
+			for number in range(len(failed_movie_objects_list)):
+				html_file.write(str(failed_movie_objects_list[number]) + ', ')
 
 			html_file.write(footer)
 			html_file.close()
@@ -92,15 +106,18 @@ def main():
 			webbrowser.open('file://' + os.path.realpath(output_file))
 		except Exception, e:	
 			print e
-			print "***** Error. Maybe try to run the script again but bit later? *****"    	
+			print "***** Error. Maybe try to run the script again but bit later? *****" 
+			logging.critical('Critical error -- shutting down')   	   	
 			sys.exit(0)	
 	
 	except Exception, e:	
 		print e
-		print "***** Error. Maybe try to run the script again but bit later? *****"    	
+		print "***** Error. Maybe try to run the script again but bit later? *****" 
+		logging.critical('Critical error -- shutting down')   	
 		sys.exit(0)	
-
-
+		
+	# except: 
+	# 	print "Unexpected error:", sys.exc_info()[0]
 
 
 

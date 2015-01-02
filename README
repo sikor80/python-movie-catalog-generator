@@ -1,0 +1,24 @@
+
+
+###############################################
+
+python-movie-catalog-generator
+
+Python script that scans a given movie directory and generates html summary page using IMDB.com information. 
+
+REQUIRMENTS:
+- Linux or Mac OS
+- Python 2.7 
+- Active Internet connection 
+- Each of the movie files needs to be stored in a separate directory / folder
+- Name of the directories needs follows this pattern: "Name Of The Movie (Year)" For example: "American Hustle (2013)"
+
+
+USAGE:
+- Run python main.py
+- Follow instructions from the screen
+
+###############################################
+
+
+
